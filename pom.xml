@@ -47,6 +47,18 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>no-db-app-hosted-repo</id>
+			<name>no-db-app-hosted-repo</name>
+			<url>http://localhost:8089/repository/no-db-app-hosted-repo/</url>
+		</snapshotRepository>
+		<repository>
+			<id>no-db-app-hosted-repo</id>
+			<name>no-db-app-hosted-repo</name>
+			<url>http://localhost:8089/repository/no-db-app-hosted-repo/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>
