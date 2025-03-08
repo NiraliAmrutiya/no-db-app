@@ -20,8 +20,8 @@ pipeline {
         stage('Maven Deploy') {
             steps {
                 echo 'maven deploying'
-                echo 'NEXUS_USERNAME = ${NEXUS_USERNAME}'
-                echo 'NEXUS_PASSWORD = $NEXUS_PASSWORD'
+                echo "NEXUS_USERNAME = ${NEXUS_USERNAME}"
+                echo "NEXUS_PASSWORD = $NEXUS_PASSWORD"
                 sh 'mvn deploy --settings ./.mvn/local-settings.xml'
             }
         }
