@@ -6,6 +6,7 @@ pipeline {
     }
 
     environment {
+        APP_VERSION = '1.0.0'
         NEXUS_USERNAME = 'admin'
         NEXUS_PASSWORD = 'admin'
     }
