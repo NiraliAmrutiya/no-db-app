@@ -51,12 +51,12 @@
 		<snapshotRepository>
 			<id>no-db-app-hosted</id>
 			<name>no-db-app-hosted</name>
-			<url>http://localhost:8089/repository/no-db-app-hosted/</url>
+			<url>http://172.17.0.1:8089/repository/no-db-app-hosted/</url>
 		</snapshotRepository>
 		<repository>
 			<id>no-db-app-hosted</id>
 			<name>no-db-app-hosted</name>
-			<url>http://localhost:8089/repository/no-db-app-hosted/</url>
+			<url>http://172.17.0.1:8089/repository/no-db-app-hosted/</url>
 		</repository>
 	</distributionManagement>
 
