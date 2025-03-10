@@ -6,8 +6,8 @@
     
     <server>
       <id>no-db-app-hosted</id>
-      <username>${env.NEXUS_USERNAME}</username>
-      <password>${env.NEXUS_PASSWORD}</password>
+      <username>${env.USERNAME}</username>
+      <password>${env.PASSWORD}</password>
     </server>
      
     <!-- <server>

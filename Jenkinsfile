@@ -4,12 +4,6 @@ pipeline {
         maven 'maven-3.9.9'
     }
 
-    environment {
-        APP_VERSION = '1.0.0'
-        NEXUS_USERNAME = 'no-db-app-maven-user'
-        NEXUS_PASSWORD = 'admin'
-    }
-    
     stages {
         stage("Maven Clean"){
             steps{
@@ -25,10 +19,12 @@ pipeline {
         }
         stage('Maven Deploy') {
             steps {
-                echo 'maven deploying'
-                echo "NEXUS_USERNAME = $NEXUS_USERNAME"
-                echo "NEXUS_PASSWORD = $NEXUS_PASSWORD"
-                sh "export NEXUS_USERNAME='no-db-app-hosted-user' && export APP_VERSION='1.0.1' && export NEXUS_PASSWORD='admin' && mvn deploy --settings ./.mvn/local-settings.xml"
+                withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    echo 'maven deploying'
+                    echo "USERNAME = $USERNAME"
+                    echo "PASSWORD = $PASSWORD"
+                    sh "export APP_VERSION='1.0.1' && mvn deploy --settings ./.mvn/local-settings.xml"
+                }
             }
         }
     }
