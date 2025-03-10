@@ -51,12 +51,12 @@
 		<snapshotRepository>
 			<id>no-db-app-hosted-repo</id>
 			<name>no-db-app-hosted-repo</name>
-			<url>http://host.docker.internal:8089/repository/no-db-app-hosted-repo/</url>
+			<url>http://host.docker.internal:8089/repository/maven-no-db-app/</url>
 		</snapshotRepository>
 		<repository>
 			<id>no-db-app-hosted-repo</id>
 			<name>no-db-app-hosted-repo</name>
-			<url>http://host.docker.internal:8089/repository/no-db-app-hosted-repo/</url>
+			<url>http://host.docker.internal:8089/repository/maven-no-db-app/</url>
 		</repository>
 	</distributionManagement>
 
