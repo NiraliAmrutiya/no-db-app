@@ -28,7 +28,7 @@ pipeline {
                 echo 'maven deploying'
                 echo "NEXUS_USERNAME = $NEXUS_USERNAME"
                 echo "NEXUS_PASSWORD = $NEXUS_PASSWORD"
-                sh 'mvn deploy --settings ./.mvn/local-settings.xml'
+                sh "export NEXUS_USERNAME='no-db-app-hosted-user' && export APP_VERSION='1.0.1' && export NEXUS_PASSWORD='admin' && mvn deploy --settings ./.mvn/local-settings.xml"
             }
         }
     }
