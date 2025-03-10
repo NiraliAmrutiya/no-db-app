@@ -51,12 +51,12 @@
 		<snapshotRepository>
 			<id>no-db-app-hosted-repo</id>
 			<name>no-db-app-hosted-repo</name>
-			<url>http://172.17.0.2:8089/repository/no-db-app-hosted-repo/</url>
+			<url>http://host.docker.internal:8089/repository/no-db-app-hosted-repo/</url>
 		</snapshotRepository>
 		<repository>
 			<id>no-db-app-hosted-repo</id>
 			<name>no-db-app-hosted-repo</name>
-			<url>http://172.17.0.2:8089/repository/no-db-app-hosted-repo/</url>
+			<url>http://host.docker.internal:8089/repository/no-db-app-hosted-repo/</url>
 		</repository>
 	</distributionManagement>
 
