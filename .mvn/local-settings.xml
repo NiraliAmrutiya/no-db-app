@@ -5,11 +5,11 @@
   <servers>
     
     <server>
-      <id>no-db-app</id>
+      <id>no-db-app-hosted</id>
       <username>${env.NEXUS_USERNAME}</username>
       <password>${env.NEXUS_PASSWORD}</password>
     </server>
-    
+     
     <!-- <server>
       <id>no-db-app</id>
       <privateKey></privateKey>
