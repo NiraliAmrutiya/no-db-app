@@ -7,13 +7,13 @@ pipeline {
     stages {
         stage("Maven Clean"){
             steps{
-                echo 'maven cleaning'
+                echo 'Maven cleaning'
                 sh 'mvn clean'
             }
         }
         stage('Maven Compile') {
             steps {
-                echo 'maven compiling'
+                echo 'Maven compiling'
                 sh 'mvn compile'
             }
         }
@@ -21,8 +21,8 @@ pipeline {
         stage('SonarQube Analysis') {            
             steps {
                 withSonarQubeEnv('SonarQube') { 
+                   echo 'SonarQube Analysis Started' 
                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=no-db-app -Dsonar.projectName=no-db-app"
-                   echo 'SonarQube Analysis Completed'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Maven Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    echo 'maven deploying'
+                    echo 'Maven deploying'
                     echo "USERNAME = $USERNAME"
                     echo "PASSWORD = $PASSWORD"
                     sh "export APP_VERSION='1.0.1' && mvn deploy --settings ./.mvn/local-settings.xml"
