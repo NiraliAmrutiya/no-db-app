@@ -20,8 +20,8 @@ pipeline {
         
         stage('SonarQube Analysis') {            
             steps {
-                withSonarQubeEnv('SonarQube') { // Replace with the name you configured in Jenkins
-                   sh '''mvn clean verify sonar:sonar -Dsonar.projectKey=no-db-app -Dsonar.projectName='no-db-app' -Dsonar.host.url=http://localhost:9000''' //port 9000 is default for sonar
+                withSonarQubeEnv('SonarQube') { 
+                   sh "mvn clean verify sonar:sonar -Dsonar.projectKey=no-db-app -Dsonar.projectName=no-db-app"
                    echo 'SonarQube Analysis Completed'
                 }
             }
