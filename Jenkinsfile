@@ -21,7 +21,7 @@ pipeline {
         stage('SonarQube Analysis') {            
             steps {
                 withSonarQubeEnv('SonarQube') { 
-                   echo 'SonarQube Analysis Started' 
+                   echo '**SonarQube Analysis Started**' 
                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=no-db-app -Dsonar.projectName=no-db-app"
                 }
             }
