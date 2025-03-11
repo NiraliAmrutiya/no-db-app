@@ -17,6 +17,15 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') { // Replace with the name you configured in Jenkins
+                    sh 'sonar-scanner' // Or your specific scanner command
+                }
+            }
+        }
+    
         stage('Maven Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
