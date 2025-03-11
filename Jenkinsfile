@@ -19,13 +19,15 @@ pipeline {
         }
         
         stage('SonarQube Analysis') {
+            
             steps {
                 withSonarQubeEnv('SonarQube') { // Replace with the name you configured in Jenkins
-                    sh 'sonar-scanner' // Or your specific scanner command
+                   sh '''mvn clean verify sonar:sonar -Dsonar.projectKey=no-db-app -Dsonar.projectName='no-db-app' -Dsonar.host.url=http://localhost:9000''' //port 9000 is default for sonar
+                   echo 'SonarQube Analysis Completed'
                 }
             }
         }
-    
+    }
         stage('Maven Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
