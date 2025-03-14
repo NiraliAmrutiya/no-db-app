@@ -7,13 +7,13 @@ pipeline {
     stages {
         stage("Maven Clean"){
             steps{
-                echo 'Maven cleaning'
+                echo 'Maven Clean Started'
                 sh 'mvn clean'
             }
         }
         stage('Maven Compile') {
             steps {
-                echo 'Maven compiling'
+                echo 'Maven Compile Started'
                 sh 'mvn compile'
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage('Maven Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    echo 'Maven deploying'
+                    echo 'Maven Deploy Started'
                     echo "USERNAME = $USERNAME"
                     echo "PASSWORD = $PASSWORD"
                     sh "export APP_VERSION='1.0.1' && mvn deploy --settings ./.mvn/local-settings.xml"
