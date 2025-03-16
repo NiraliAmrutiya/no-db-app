@@ -32,16 +32,23 @@ pipeline {
                 }
             }
         }
-    
-        stage('Maven Deploy') {
+
+        stage('Maven Package') {            
             steps {
-                withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    echo 'Maven Deploy Started'
-                    echo "USERNAME = $USERNAME"
-                    echo "PASSWORD = $PASSWORD"
-                    sh "export APP_VERSION='1.0.1' && mvn deploy --settings ./.mvn/local-settings.xml"
-                }
+                echo 'Maven Package' 
+                sh "mvn package"                
             }
         }
+    
+        // stage('Maven Deploy') {
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        //             echo 'Maven Deploy Started'
+        //             echo "USERNAME = $USERNAME"
+        //             echo "PASSWORD = $PASSWORD"
+        //             sh "export APP_VERSION='1.0.1' && mvn deploy --settings ./.mvn/local-settings.xml"
+        //         }
+        //     }
+        // }
     }
 }
