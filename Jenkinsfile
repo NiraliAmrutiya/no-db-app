@@ -5,24 +5,24 @@ pipeline {
     }
 
     stages {
-        stage("Maven Clean"){
-            steps{
-                echo 'Maven Clean Started'
-                sh 'mvn clean'
-            }
-        }
-        stage('Maven Compile') {
-            steps {
-                echo 'Maven Compile Started'
-                sh 'mvn compile'
-            }
-        }
-        stage('Maven Test') {
-            steps {
-                echo 'Maven test'
-                sh 'mvn test'
-            }
-        }
+        // stage("Maven Clean"){
+        //     steps{
+        //         echo 'Maven Clean Started'
+        //         sh 'mvn clean'
+        //     }
+        // }
+        // stage('Maven Compile') {
+        //     steps {
+        //         echo 'Maven Compile Started'
+        //         sh 'mvn compile'
+        //     }
+        // }
+        // stage('Maven Test') {
+        //     steps {
+        //         echo 'Maven test'
+        //         sh 'mvn test'
+        //     }
+        // }
         
         // stage('SonarQube Analysis') {            
         //     steps {
@@ -68,7 +68,7 @@ pipeline {
                     ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "ls -lh /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar && file /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar"
                     
                     echo "identify process on 8080, kill it and restart the app"
-                    ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "cd /home/ec2-user/no-db-app && sudo chmod u+x ./deploy.sh && ./deploy.sh $APP_VERSION"
+                    ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "cd /home/ec2-user/no-db-app && sudo chmod u+x ./deploy.sh && . ./deploy.sh $APP_VERSION"
                     '''
                 }
             }
