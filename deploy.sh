@@ -1,10 +1,11 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-    err 'Pass version number'
+    echo 'Pass version number'
+    exit 1
 fi
 
-export APP_VERSION = "$1"
+export APP_VERSION=$1
 
 PID=$(sudo lsof -i :8080 -t)
 echo ${PID}
