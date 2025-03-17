@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-export APP_VERSION=$1
+APP_VERSION="$1"
 
 PID=$(sudo lsof -i :8080 -t)
 echo ${PID}
