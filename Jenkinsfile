@@ -3,6 +3,10 @@ pipeline {
     tools {
         maven 'maven-3.9.9'
     }
+    
+    environment {
+        APP_VERSION = '1.0.3'
+    }
 
     stages {
         // stage("Maven Clean"){
@@ -38,14 +42,14 @@ pipeline {
         //         withCredentials([usernamePassword(credentialsId: 'adminUserNexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         //             echo 'Maven Deploy Started'
                     
-        //             sh "export APP_VERSION='1.0.0' && mvn deploy --settings ./.mvn/local-settings.xml"
+        //             sh "mvn deploy --settings ./.mvn/local-settings.xml"
         //         }
         //     }
         // }
         
         stage('Publish Artifact') {
             steps {
-                sh "export APP_VERSION='1.0.1' && mvn package"
+                sh "mvn package"
             }
         }
         
@@ -54,9 +58,6 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'no-db-app-ec2-key.pem', variable: 'secretFile')]) {
                     sh '''#!/bin/bash
-                    
-                    export APP_VERSION='1.0.1'
-                    echo $APP_VERSION
                     
                     ls
                     
@@ -68,7 +69,7 @@ pipeline {
                     ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "ls -lh /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar && file /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar"
                     
                     echo "identify process on 8080, kill it and restart the app"
-                    ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "cd /home/ec2-user/no-db-app && sudo chmod u+x ./deploy.sh && . ./deploy.sh $APP_VERSION"
+                    ssh -i $secretFile ec2-user@ec2-54-162-152-171.compute-1.amazonaws.com "export APP_VERSION=${APP_VERSION} && echo $APP_VERSION && cd /home/ec2-user/no-db-app && sudo chmod u+x ./deploy.sh && source ./deploy.sh ${APP_VERSION}"
                     '''
                 }
             }
