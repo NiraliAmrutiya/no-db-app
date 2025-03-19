@@ -1,0 +1,24 @@
+FROM maven:3.8.3-openjdk-17 as build
+
+ARG APP_VERSION
+ENV APP_VERSION=$APP_VERSION
+
+ARG USERNAME
+ENV USERNAME=$USERNAME
+
+ARG PASSWORD
+ENV PASSWORD=$PASSWORD
+
+COPY . /workspace/app
+
+WORKDIR /workspace/app
+
+EXPOSE 8080
+
+RUN mvn clean package 
+
+# deploy --settings ./.mvn/local-settings.xml
+
+COPY ./target/no-db-app-${APP_VERSION}.jar no-db-app.jar
+
+ENTRYPOINT ["java", "-jar","no-db-app.jar"]

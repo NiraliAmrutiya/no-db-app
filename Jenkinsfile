@@ -84,11 +84,23 @@ pipeline {
                     echo "Pull image from ECR"
                     ssh -i $secretFile ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com "docker pull 913524905599.dkr.ecr.us-east-1.amazonaws.com/no-db-app:1.0.0"
                     
+<<<<<<< HEAD
                     echo "Run image on EC2"
                     ssh -i $secretFile ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com "docker run -d -p 8080:8080 913524905599.dkr.ecr.us-east-1.amazonaws.com/no-db-app:1.0.0"
                     
                     echo "Docker container list"
                     ssh -i $secretFile ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com "docker ps"
+=======
+                    echo "Transferring JAR to EC2..."
+                    scp -i $secretFile ./target/no-db-app-$APP_VERSION.jar ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com:/home/ec2-user/no-db-app/
+                    scp -i $secretFile ./deploy.sh ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com:/home/ec2-user/no-db-app/
+
+                    echo "Verifying JAR on remote server..."
+                    ssh -i $secretFile ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com "ls -lh /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar && file /home/ec2-user/no-db-app/no-db-app-$APP_VERSION.jar"
+                    
+                    echo "identify process on 8080, kill it and restart the app"
+                    ssh -i $secretFile ec2-user@ec2-98-84-138-80.compute-1.amazonaws.com "export APP_VERSION=${APP_VERSION} && echo $APP_VERSION && cd /home/ec2-user/no-db-app && sudo chmod u+x ./deploy.sh && source ./deploy.sh ${APP_VERSION}"
+>>>>>>> 3ed6a403b4f34e4531bd7a07ff756be85d2897da
                     '''
                 }
             }
